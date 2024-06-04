@@ -1,4 +1,4 @@
-# Turborepo starter
+# Girudo
 
 This is an official starter Turborepo.
 
