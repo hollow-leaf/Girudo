@@ -2,6 +2,8 @@
 pragma solidity ^0.8.20;
 
 import { IHypercertToken } from "./interfaces/IHypercertToken.sol";
+import { ENS } from "./libraries/ENS.sol";
+import {IReverseRegistrar} from "./interfaces/IReverseRegistrar.sol";
 
 contract Girudo {
   IHypercertToken hypercerts;
@@ -25,7 +27,7 @@ contract Girudo {
     require(girudoMembers[msg.sender] == 1, "Girudo: caller is not a member");
     _;
   }
-  
+
   function initialize(address _addr) public {
     hypercerts = IHypercertToken(_addr);
   }
