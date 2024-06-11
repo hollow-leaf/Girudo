@@ -1,8 +1,7 @@
-import { HardhatUserConfig } from "hardhat/config"
-import { NetworkUserConfig } from "hardhat/types"
+import type { HardhatUserConfig } from "hardhat/config"
+import type { NetworkUserConfig } from "hardhat/types"
 // hardhat plugin
-import "@nomiclabs/hardhat-ethers"
-import "@nomicfoundation/hardhat-toolbox"
+import "@nomicfoundation/hardhat-toolbox-viem";
 
 import { config as dotenvConfig } from "dotenv"
 import { resolve } from "path"

@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "hardhat compile",
-    "deploy:token": "hardhat deploy:token --verify",
+    "deploy:token": "hardhat deploy:token",
     "deploy:miner": "hardhat deploy:miner --verify",
     "verify": "hardhat verify"
   },
@@ -15,15 +15,17 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@nomicfoundation/hardhat-ignition-viem": "^0.15.4",
-    "@nomicfoundation/hardhat-verify": "^2.0.4",
-    "@nomicfoundation/hardhat-viem": "^2.0.2",
+    "@nomicfoundation/hardhat-ignition": "^0.15.4",
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
     "@openzeppelin/contracts": "^5.0.1",
     "@openzeppelin/contracts-upgradeable": "^5.0.2",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "dotenv": "16.3.1",
-    "hardhat": "2.22.0",
+    "hardhat": "^2.22.0",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@hypercerts-org/contracts": "2.0.0-alpha.0"
   }
 }
