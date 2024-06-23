@@ -15,8 +15,12 @@
     "@mui/material": "^5.15.19",
     "@mui/styled-engine-sc": "6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.6.2",
+    "@mysten/dapp-kit": "^0.14.9",
+    "@mysten/sui": "^1.2.0",
     "@repo/ui": "workspace:*",
+    "@tanstack/react-query": "^5.45.1",
     "DatePicker": "link:@mui/x-date-pickers/DatePicker",
+    "clsx": "^2.0.0",
     "date-fns": "^3.6.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",
@@ -24,8 +28,11 @@
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
+    "react-toastify": "^10.0.5",
     "solid": "link:@heroicons/react/20/solid",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "tailwind-merge": "^2.3.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.1.1",

@@ -10,16 +10,13 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        '0': "url('/background-0.jpg')",
+        main: "url('/background-0.jpg')",
       },
       colors: {
-        "bgGray": "#DED6D6",
-        "cBlue": "#7D938A",
-      }
+        bgGray: "#DED6D6",
+        cBlue: "#7D938A",
+      },
     },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
-}
-
+  plugins: [require("flowbite/plugin")],
+};
