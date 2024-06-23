@@ -2,6 +2,7 @@ import type { HonoContext } from '../../types'
 import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi'
 
 const QuerySchema = z.object({
+  member: z.string(),
   key: z.string(),
 })
 
@@ -35,6 +36,12 @@ const route = createRoute({
 })
 
 export const remove_data = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
+  const members = await context.env.appkv.get('members', 'text')
+  const member = context.req.query('member') as string
+  if (!members?.includes(member)) {
+    return context.json({ error: 'Unauthorized' } as const, 401)
+  }
+
   const key = context.req.query('key') as string
 
   await context.env.appkv.put(key, '')
