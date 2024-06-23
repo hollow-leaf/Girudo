@@ -3,8 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { LoginButton } from "./Login/LoginButton";
 import { useState } from "react";
+import { useAppContext } from "../providers/AppContextProvider";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import LoginMenu from "../menu/loginMenu";
+
+const NAV_LIST: Nav[] = [
+  { name: "Home", link: "/" },
+  { name: "Profile", link: "/profile" },
+  { name: "DAO", link: "/dao" },
+  { name: "Explore", link: "/explore" },
+];
+
+interface Nav {
+  name: string;
+  link: string;
+}
 
 export function Navbar() {
+  // Sui wallet
+  const { walletAddress, suiName } = useAppContext();
+  const routerLink = usePathname();
+
   const [closed, setClosed] = useState<Boolean>(true);
   function toggle() {
     setClosed(!closed);
@@ -54,83 +74,44 @@ export function Navbar() {
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="font-medium flex flex-col p-4 md:items-center md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+            {NAV_LIST.map((nav) => (
+              <li>
+                <Link
+                  className={cn(
+                    "block py-2 px-3 text-black hover:text-cBlue bg-blue-700 rounded md:bg-transparent md:p-0",
+                    nav.link === routerLink ? "text-cBlue" : "text-black",
+                  )}
+                  key={nav.name}
+                  aria-current="page"
+                  href={nav.link}
+                >
+                  {nav.name}
+                </Link>
+              </li>
+            ))}
             <li>
-              <Link
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-cBlue md:p-0"
-                aria-current="page"
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                href="/profile"
-              >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                href="/dao"
-              >
-                DAO
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                href="/"
-              >
-                Explore
-              </Link>
-            </li>
-            <li>
-              <LoginButton />
+              <div className="w-24 text-black hover:bg-cBlue hover:text-white rounded-md outline outline-black">
+                <LoginMenu />
+              </div>
             </li>
           </ul>
         </div>
         {!closed && (
           <div className="w-full md:hidden md:w-auto" id="navbar-default">
             <ul className="font-medium flex flex-col p-4 md:items-center md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
-              <li>
-                <Link
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-cBlue hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  href="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-cBlue hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  href="/profile"
-                >
-                  Profile
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-cBlue hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  href="/dao"
-                >
-                  DAO
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-cBlue hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  href="/"
-                >
-                  Explore
-                </Link>
-              </li>
-              <li>
-                <div className="w-full my-2 flex justify-start">
-                  <LoginButton />
-                </div>
+              {NAV_LIST.map((nav) => (
+                <li>
+                  <Link
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-cBlue hover:text-white md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                    key={nav.name}
+                    href={nav.link}
+                  >
+                    {nav.name}
+                  </Link>
+                </li>
+              ))}
+              <li className="w-full my-2 flex justify-start">
+                <LoginButton />
               </li>
             </ul>
           </div>

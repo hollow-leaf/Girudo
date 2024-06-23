@@ -7,7 +7,7 @@ interface UserState {
 }
 
 const useCoreUserStore = create<UserState>()((set) => ({
-  rpcUrl: SUI_TESTNET_URL,
+  rpcUrl: SUI_TESTNET_URL, // defautl to testnet
   setRpcUrl: (newUrl) => set({ rpcUrl: newUrl }),
 }));
 

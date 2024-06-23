@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body className="bg-main overflow-hidden bg-cover">
         <Provider>
           <Navbar />

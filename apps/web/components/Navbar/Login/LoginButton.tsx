@@ -1,7 +1,14 @@
+import { Button } from "@/components/ui/button";
+
 export function LoginButton() {
-    return (
-        <div>
-            <button className="bg-cBlue px-4 py-2 text-medium rounded-lg">Login</button>
-        </div>
-    )
+  return (
+    <div>
+      <Button
+        className="bg-transparent border-none outline outline-black hover:bg-cBlue"
+        variant="outline"
+      >
+        Sign in
+      </Button>
+    </div>
+  );
 }

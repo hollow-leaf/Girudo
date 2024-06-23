@@ -1,7 +1,13 @@
 "use client";
 
 import { useCurrentAccount, useSuiClient } from "@mysten/dapp-kit";
-import { PropsWithChildren, createContext, useEffect, useMemo } from "react";
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 import { useResolveSuiNSName } from "@mysten/dapp-kit";
 
 import { useUserStore } from "@/stores/useUserStore";
@@ -11,10 +17,12 @@ interface IAppContextProps {
   suiName: string | null | undefined;
 }
 
-export const AppContext = createContext<IAppContextProps>({
+const AppContext = createContext<IAppContextProps>({
   walletAddress: undefined,
   suiName: undefined,
 });
+
+export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = (props: PropsWithChildren) => {
   const client = useSuiClient();
