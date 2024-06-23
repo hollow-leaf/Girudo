@@ -5,7 +5,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@/*": ["./*"]
+    }
+    // "paths": {
+    //   "@/components/*": ["components/*"],
+    //   "@/lib/*": ["lib/*"],
+    //   "@/stores/*": ["stores/*"]
+    // }
   },
   "include": [
     "next-env.d.ts",
