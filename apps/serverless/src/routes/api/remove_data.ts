@@ -2,7 +2,7 @@ import type { HonoContext } from '../../types'
 import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi'
 
 const QuerySchema = z.object({
-  user: z.string(),
+  key: z.string(),
 })
 
 const ResponseSchema = z.object({
@@ -10,10 +10,9 @@ const ResponseSchema = z.object({
 })
 
 const route = createRoute({
-  method: 'get',
-  path: '/remove_admin',
+  method: 'post',
+  path: '/remove_data',
   request: { query: QuerySchema },
-  security: [{ Bearer: [] }],
   responses: {
     200: {
       content: {
@@ -35,15 +34,9 @@ const route = createRoute({
   },
 })
 
-export const remove_admin = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
-  const username = context.req.query('user') ?? ''
-  const admins = await context.env.appkv.get('admins', 'text')
-  const new_admins = admins
-    ?.split('\n')
-    .filter((admin) => admin !== username)
-    .join('\n')
+export const remove_data = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
+  const key = context.req.query('key') as string
 
-  await context.env.appkv.put('admins', new_admins ?? '')
-
-  return context.json({ message: `${username} has been removed from the list of admins!` })
+  await context.env.appkv.put(key, '')
+  return context.json({ message: `data has been removed from the ${key}!` })
 })

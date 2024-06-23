@@ -52,8 +52,8 @@ export const add_member = new OpenAPIHono<HonoContext>().openapi(route, async (c
     return context.json({ error: 'Invalid username!' } as const, 500)
   }
 
-  const members = await context.env.tarot.get('members', 'text')
-  await context.env.tarot.put('members', `${username}\n${members ?? ''}`)
+  const members = await context.env.appkv.get('members', 'text')
+  await context.env.appkv.put('members', `${username}\n${members ?? ''}`)
 
   return context.json({ message: `Successfully added ${username} to the list of members!` }, 200)
 })

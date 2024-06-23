@@ -1,8 +1,9 @@
- import type { HonoContext } from '../../types'
+import type { HonoContext } from '../../types'
 import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi'
 
 const QuerySchema = z.object({
-  user: z.string(),
+  key: z.string(),
+  data: z.string(),
 })
 
 const ResponseSchema = z.object({
@@ -10,13 +11,12 @@ const ResponseSchema = z.object({
 })
 
 const ResponseErrorSchema = z.object({
-  error: z.literal('Invalid username!'),
+  error: z.literal('Invalid data!'),
 })
 
 const route = createRoute({
-  method: 'get',
-  path: '/add_admin',
-  security: [{ Bearer: [] }],
+  method: 'post',
+  path: '/add_data',
   request: { query: QuerySchema },
   responses: {
     200: {
@@ -45,15 +45,15 @@ const route = createRoute({
   },
 })
 
-export const add_admin = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
-  const username = context.req.query('user')
-  console.log(username)
-  if (!username) {
-    return context.json({ error: 'Invalid username!' } as const, 500)
+export const add_data = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
+  const key = context.req.query('key') as string
+  const data = context.req.query('data')
+  console.log(data)
+  if (!data) {
+    return context.json({ error: 'Invalid data!' } as const, 500)
   }
 
-  const admins = await context.env.appkv.get('admins', 'text')
-  await context.env.appkv.put('admins', `${username}\n${admins ?? ''}`)
+  await context.env.appkv.put(key, data)
 
-  return context.json({ message: `Successfully added ${username} to the list of admins!` }, 200)
+  return context.json({ message: `Successfully added ${data} to the ${key}!` }, 200)
 })

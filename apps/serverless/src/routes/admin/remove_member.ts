@@ -37,13 +37,13 @@ const route = createRoute({
 
 export const remove_member = new OpenAPIHono<HonoContext>().openapi(route, async (context) => {
   const username = context.req.query('user') ?? ''
-  const members = await context.env.tarot.get('members', 'text')
+  const members = await context.env.appkv.get('members', 'text')
   const new_members = members
     ?.split('\n')
     .filter((member) => member !== username)
     .join('\n')
 
-  await context.env.tarot.put('members', new_members ?? '')
+  await context.env.appkv.put('members', new_members ?? '')
 
   return context.json({ message: `${username} has been removed from the list of members!` })
 })
