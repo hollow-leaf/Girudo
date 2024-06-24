@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import { useDisconnectWallet } from "@mysten/dapp-kit";
-import { SlMagnifier } from "react-icons/sl";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -15,27 +14,25 @@ import {
 import { useMemo } from "react";
 import useMeidaSize from "@/hooks/useMeidaSize";
 import { toast } from "sonner";
+import { ConnectModal } from "@mysten/dapp-kit";
+import React from "react";
+import "@mysten/dapp-kit/dist/index.css";
 
-const LoginMenu = () => {
+interface Props {
+  suiWalletAddress?: string;
+  ethWalletAddress?: string;
+  solWalletAddress?: string;
+}
+
+const LoginMenu = ({
+  suiWalletAddress,
+  ethWalletAddress,
+  solWalletAddress,
+}: Props) => {
   const screenWidth = useMeidaSize();
   const isDesktop = screenWidth >= 1280;
-  const { mutate: disconnectWallet } = useDisconnectWallet();
-
-  // const displayName = useMemo(() => {
-  //   if (suiName) {
-  //     if (suiName.length > 14) {
-  //       return suiName.slice(0, 4) + "..." + suiName.slice(-3);
-  //     }
-  //
-  //     return suiName;
-  //   }
-  //
-  //   if (walletAddress) {
-  //     return walletAddress?.slice(0, 5) + "..." + walletAddress?.slice(-4);
-  //   }
-  //
-  //   return undefined;
-  // }, [walletAddress, suiName]);
+  const { mutate: disconnectSuiWallet } = useDisconnectWallet();
+  const [suiModalOpen, setSuiModalOpen] = React.useState(false);
 
   return (
     <DropdownMenu>
@@ -44,26 +41,47 @@ const LoginMenu = () => {
         <span>{"Jarek"}</span>
       </DropdownMenuTrigger>
       {/* Content */}
-      <DropdownMenuContent
-        align={"end"}
-        className={cn(
-          "relative flex w-40 flex-col items-center border-none overflow-hidden",
-        )}
-      >
+      <DropdownMenuContent className="relative flex w-40 flex-col items-center border-none overflow-hidden">
         <DropdownMenuGroup className="w-full p-0 m-0 flex flex-col gap-2 py-1">
           {/* SUI */}
-          <DropdownMenuItem className="DropdownMenuItem w-full">
-            <button className="w-full flex items-center">
-              <Image
-                src="/images/sui-logo.svg"
-                alt="sui-log"
-                width={20}
-                height={20}
+          <DropdownMenuItem
+            className="DropdownMenuItem w-full"
+            onSelect={(e) => e.preventDefault()}
+          >
+            {suiWalletAddress ? (
+              <button
+                onClick={() => disconnectSuiWallet()}
+                className="w-full flex items-center"
+              >
+                <Image
+                  src="/images/sui-logo.svg"
+                  alt="sui-log"
+                  width={20}
+                  height={20}
+                />
+                <span className="w-2/3 ml-5 text-sm text-black text-left">
+                  Sui
+                </span>
+                <div className="w-2 h-2 rounded-full mr-2 bg-green-300" />
+              </button>
+            ) : (
+              <ConnectModal
+                trigger={
+                  <button className="w-full flex items-center">
+                    <Image
+                      src="/images/sui-logo.svg"
+                      alt="sui-log"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="w-2/3 ml-5 text-sm text-black text-left">
+                      Sui
+                    </span>
+                    <div className="w-2 h-2 rounded-full mr-2 bg-gray-300" />
+                  </button>
+                }
               />
-              <span className="w-2/3 ml-5 text-sm text-black text-left">
-                Sui
-              </span>
-            </button>
+            )}
           </DropdownMenuItem>
           {/* Ethereum */}
           <DropdownMenuItem className="DropdownMenuItem w-full">
@@ -95,6 +113,12 @@ const LoginMenu = () => {
               <span className="w-2/3 ml-5 text-sm text-black text-left">
                 Ethereum
               </span>
+              <div
+                className={cn(
+                  "w-2 h-2 rounded-full mr-2",
+                  ethWalletAddress ? "bg-green-300" : "bg-gray-300",
+                )}
+              />
             </button>
           </DropdownMenuItem>
           {/* Solana */}
@@ -109,6 +133,12 @@ const LoginMenu = () => {
               <span className="w-2/3 ml-5 text-sm text-black text-left">
                 Solana
               </span>
+              <div
+                className={cn(
+                  "w-2 h-2 rounded-full mr-2",
+                  solWalletAddress ? "bg-green-300" : "bg-gray-300",
+                )}
+              />
             </button>
           </DropdownMenuItem>
         </DropdownMenuGroup>

@@ -20,10 +20,14 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en" className="light">
-      <body className="bg-main overflow-hidden bg-cover">
+      <body className="m-0 h-svh">
         <Provider>
-          <Navbar />
-          {children}
+          <div className="min-h-screen font-sans antialiased relative bg-main bg-cover bg-fixed bg-center">
+            <Navbar />
+            <div className="min-h-[calc(100vh-224px) text-[#6e6f6f] flex flex-col py-6 max-w-6xl m-auto">
+              {children}
+            </div>
+          </div>
         </Provider>
       </body>
     </html>
