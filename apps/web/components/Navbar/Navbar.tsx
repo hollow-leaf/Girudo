@@ -22,13 +22,17 @@ interface Nav {
 
 export function Navbar() {
   // Sui wallet
-  const { walletAddress, suiName } = useAppContext();
+  const { walletAddress: suiWalletAddress } = useAppContext();
   const routerLink = usePathname();
 
   const [closed, setClosed] = useState<Boolean>(true);
   function toggle() {
     setClosed(!closed);
   }
+
+  // MOCK_DATA
+  const ethWalletAddress = undefined;
+  const solWalletAddress = undefined;
 
   return (
     <nav className="glass2 border-gray-200">
@@ -91,7 +95,11 @@ export function Navbar() {
             ))}
             <li>
               <div className="w-24 text-black hover:bg-cBlue hover:text-white rounded-md outline outline-black">
-                <LoginMenu />
+                <LoginMenu
+                  suiWalletAddress={suiWalletAddress}
+                  ethWalletAddress={ethWalletAddress}
+                  solWalletAddress={solWalletAddress}
+                />
               </div>
             </li>
           </ul>
