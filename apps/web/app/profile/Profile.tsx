@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export function Profile() {
     return (
-        <div className="w-64 max-h-[700px] my-6 md:mx-6 md:my-0 rounded-lg glass">
+        <div className="w-64 h-[700px] my-6 md:mx-6 md:my-0 rounded-lg glass">
             <div className="flex justify-center px-4 py-8">
                 <div className="space-y-6 text-black">
                     <Image
