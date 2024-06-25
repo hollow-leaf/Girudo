@@ -3,3 +3,5 @@ export type RpcNode = {
   url: string;
   latency: number;
 };
+
+export type GUILD = "PSYDUCK";

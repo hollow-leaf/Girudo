@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SUI_TESTNET_URL } from "../constants/rpcNodeList";
+import { RPC_TESTNET_NODES } from "../constants/rpcNodeList";
 
 interface UserState {
   rpcUrl: string;
@@ -7,7 +7,7 @@ interface UserState {
 }
 
 const useCoreUserStore = create<UserState>()((set) => ({
-  rpcUrl: SUI_TESTNET_URL, // defautl to testnet
+  rpcUrl: RPC_TESTNET_NODES[0]?.url ?? "https://fullnode.testnet.sui.io/", // defautl to testnet
   setRpcUrl: (newUrl) => set({ rpcUrl: newUrl }),
 }));
 
