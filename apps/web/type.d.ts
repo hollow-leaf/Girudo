@@ -3,3 +3,10 @@ export type RpcNode = {
   url: string;
   latency: number;
 };
+
+export type UserInfo = {
+  username: string;
+  avater: string;
+  email: string;
+  suiAddress: string;
+}

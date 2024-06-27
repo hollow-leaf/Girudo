@@ -1,7 +1,7 @@
+import React from 'react';
 import Image from "next/image";
 import { useState } from "react";
 import { ModalL } from "@/components/Modal/ModalL";
-import { DayPicker } from "react-day-picker";
 import { DatePickerSection } from "@/components/Modal/DatePicker";
 
 export function TaskCreator() {
@@ -53,7 +53,7 @@ export function TaskCreator() {
           </div>
         </div>
         <div className="md:flex pb-8 px-3 md:px-8 justify-end">
-          <button className="bg-cBlue p-3 rounded-md">Create</button>
+          <button className="bg-cBlue p-3 text-white rounded-md">Create</button>
         </div>
       </ModalL>
     </div>

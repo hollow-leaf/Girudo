@@ -1,3 +1,4 @@
+import React from 'react';
 import Provider from "@/components/providers/Provider";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -20,7 +21,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en" className="light">
-      <body className="m-0 h-svh">
+      <body className="bg-main bg-cover">
         <Provider>
           <div className="min-h-screen font-sans antialiased relative bg-main bg-cover bg-fixed bg-center">
             <Navbar />

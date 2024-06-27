@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { LoginButton } from "./Login/LoginButton";
@@ -7,6 +8,7 @@ import { useAppContext } from "../providers/AppContextProvider";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import LoginMenu from "../menu/loginMenu";
+import { useLoginStore } from '@/stores/useUserStore';
 
 const NAV_LIST: Nav[] = [
   { name: "Home", link: "/" },
@@ -24,6 +26,7 @@ export function Navbar() {
   // Sui wallet
   const { walletAddress: suiWalletAddress } = useAppContext();
   const routerLink = usePathname();
+  const {suiUserInfo, userInfo, loginByJwt} = useLoginStore();
 
   const [closed, setClosed] = useState<Boolean>(true);
   function toggle() {
@@ -93,6 +96,7 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
+            {userInfo.username == "" ? <li><LoginButton /></li>: <li><div className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.username}</div></li>}
             <li>
               <div className="w-24 text-black hover:bg-cBlue hover:text-white rounded-md outline outline-black">
                 <LoginMenu
