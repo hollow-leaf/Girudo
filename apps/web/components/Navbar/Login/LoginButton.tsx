@@ -46,7 +46,6 @@ export function LoginButton() {
     if (oauthParams && oauthParams.id_token) {
       const decodedJwt = jwtDecode(oauthParams.id_token as string);
       setJwtString(oauthParams.id_token as string);
-      console.log(oauthParams.id_token)
       setDecodedJwt(decodedJwt);
       loginBySub(oauthParams.id_token as string, decodedJwt.sub as string)
     }

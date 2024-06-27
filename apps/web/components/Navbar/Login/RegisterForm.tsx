@@ -1,7 +1,7 @@
 import { Button } from '@/app/components/common/button';
 import React, { useState } from 'react';
 import Image from "next/image";
-import { uploadFile } from '@/services/pinta';
+import { uploadFile } from '@/services/serverless';
 import { setSaltByUserIdToken } from '@/services/serverless';
 import { generateRandomness } from '@mysten/zklogin';
 
@@ -18,6 +18,7 @@ export function RegisterForm(props: {sub: string | undefined, loading: any}) {
             setAvater(files[0])
             const reader = new FileReader();
             reader.onloadend = () => {
+                console.log(reader.result as string)
                 setPreview(reader.result as string);
             };
             reader.readAsDataURL(files[0] as File);
@@ -30,7 +31,8 @@ export function RegisterForm(props: {sub: string | undefined, loading: any}) {
 
         var cid = ""
         const salt = generateRandomness();
-        if(avater !== undefined && avater) cid = await uploadFile(avater)
+        if(preview !== undefined && preview) await uploadFile(preview, props.sub as string)
+
         const r = await setSaltByUserIdToken(props.sub as string, salt, {username: name, email: email, avater: cid, suiAddress: ""})
         if(r) {
             setRegisterSuccess(true)

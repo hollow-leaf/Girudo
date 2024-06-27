@@ -12,7 +12,7 @@ export async function saltByUserIdToken(sub: string): Promise<{salt: string, use
 
     const result = await response.json();
     console.log(result)
-    if(result) {
+    if(result.data != null) {
         return userInfoFromString(result.data)
     } else {
         return {salt: "", userInfo: {username: "", avater: "", email: "", suiAddress: ""}}
@@ -45,3 +45,39 @@ function userInfoFromString(s: string): {salt: string, userInfo: UserInfo} {
     const a: any = s.split(",")
     return {salt: a[4], userInfo: {username: a[0], avater: a[2], email: a[1], suiAddress: a[3]}}
 }
+
+export const uploadFile = async (fileToUpload: string, userID: string) => {
+    try {
+        const data = new FormData();
+        data.set("file", fileToUpload);
+        data.set("userId", userID)
+        const res = await fetch("https://greenpower.wayneies1206.workers.dev/uploadAvater", {
+            method: "POST",
+            body: data,
+        });
+        const resData = await res.json();
+        return resData.IpfsHash
+    } catch (e) {
+        console.log(e);
+        return undefined
+    }
+};
+
+export async function getAvater(userId: string){
+
+    try {
+        const data = new FormData();
+        data.set("userId", userId);
+        const res = await fetch("https://greenpower.wayneies1206.workers.dev/getAvater", {
+            method: "POST",
+            body: data,
+        });
+
+        const resData = await res.json();
+
+        return resData.avater
+    } catch (e) {
+        console.log(e);
+        return undefined
+    }
+};
