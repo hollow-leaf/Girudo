@@ -14,6 +14,15 @@ function main() {
     },
   })
 
+  app.use('*', cors({
+    origin: '*',
+    allowHeaders: ['Content-Type', 'Authorization'],
+    allowMethods: ['POST', 'GET', 'OPTIONS'],
+    exposeHeaders: ['Content-Length'],
+    maxAge: 600,
+    credentials: true,
+  }))
+
   app.get('/docs', swaggerUI({ url: openapi_documentation_route }))
   // app.use(cors())
   app.use(prettyJSON())

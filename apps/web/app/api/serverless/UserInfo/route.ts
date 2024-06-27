@@ -9,6 +9,9 @@ try {
 
     const response = await fetch(`https://girudo-app.kidneyweakx.workers.dev/api/get_data?key=${sub}`, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+          }
     });
 
     const result = await response.json();
