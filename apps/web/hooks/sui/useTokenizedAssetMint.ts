@@ -1,3 +1,4 @@
+import { queryClient } from "@/components/providers/Provider";
 import {
   GUILDS_ASSET_CAP,
   GUILDS_TYPE_LIST,
@@ -17,14 +18,34 @@ interface TokenizedAssetMintArgs {
   guild: GUILD;
   metadata: { [key: string]: string };
   value: bigint;
+  recipient: string;
 }
 export const useTokenizedAssetMint = () => {
   const client = useSuiClient();
   const account = useCurrentAccount();
-  const { mutate: signAndExecuteTransaction } = useSignAndExecuteTransaction();
+  const { mutateAsync: signAndExecuteTransaction } =
+    useSignAndExecuteTransaction({
+      execute: async ({ bytes, signature }) =>
+        await client.executeTransactionBlock({
+          transactionBlock: bytes,
+          signature,
+          options: {
+            // Raw effects are required so the effects can be reported back to the wallet
+            showRawEffects: true,
+            // Select additional data to return
+            showObjectChanges: true,
+          },
+        }),
+    });
 
+  console.log("queryClient", queryClient);
   return useMutation({
-    mutationFn: async ({ guild, metadata, value }: TokenizedAssetMintArgs) => {
+    mutationFn: async ({
+      guild,
+      metadata,
+      value,
+      recipient,
+    }: TokenizedAssetMintArgs) => {
       if (!account) {
         throw new Error("Fail to connect to wallet");
       }
@@ -41,11 +62,31 @@ export const useTokenizedAssetMint = () => {
         value,
       );
 
-      tx.transferObjects([tokenizedAsset], account.address);
+      tx.transferObjects([tokenizedAsset], recipient);
+
+      // const res = await client.devInspectTransactionBlock({
+      //   transactionBlock: tx as any,
+      //   sender: account.address,
+      // });
+
+      await signAndExecuteTransaction(
+        {
+          transaction: tx as any,
+          chain: "sui:testnet",
+        },
+        {
+          onSuccess: (result) => {
+            console.log("object changes", result.objectChanges);
+            return result.digest;
+          },
+        },
+      );
     },
-    onSuccess: () => {
-      console.log("success");
-      toast.success("success");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["getOwnedTokenizedAsset", account!.address],
+      });
+      toast.success(`success tx. Sender: ${account!.address}`);
     },
     onError: (err: Error) => {
       console.error("error", err), toast.error("error");

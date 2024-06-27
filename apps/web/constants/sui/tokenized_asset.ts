@@ -1,5 +1,8 @@
 import { GUILD } from "@/type";
 
+export const TOKENIZED_ASSET_TYPE =
+  "0xa8fe0d9f91e4f63df6bd4816278fb02589a763ec9410ecdde0d1128538825a1d::tokenized_asset::TokenizedAsset";
+
 export const GUILDS_TYPE_LIST: Record<GUILD, string> = {
   PSYDUCK:
     "0x768ab76bc7ada23557e80b6429261a80efcd07ad9e9c6909c2f390ce5f6f7e47::psyduck_assets::PSYDUCK_ASSETS",

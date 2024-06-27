@@ -10,8 +10,15 @@ import ToastProvider from "./ToastProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Toaster from "../shared/Toaster";
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  },
+});
 const Provider = ({ children }: { children: ReactNode }) => {
-  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <SuiWalletProvider>

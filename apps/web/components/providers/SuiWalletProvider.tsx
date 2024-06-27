@@ -2,7 +2,11 @@
 
 import React, { useEffect, useMemo } from "react";
 import { getFullnodeUrl } from "@mysten/sui/client";
-import { SuiClientProvider, WalletProvider } from "@mysten/dapp-kit";
+import {
+  lightTheme,
+  SuiClientProvider,
+  WalletProvider,
+} from "@mysten/dapp-kit";
 import { type StateStorage } from "zustand/middleware";
 import { useUserStore } from "@/stores/useUserStore";
 
@@ -26,6 +30,7 @@ const SuiWalletProvider = ({ children }: Props) => {
   return (
     <SuiClientProvider networks={networks} defaultNetwork="custom">
       <WalletProvider
+        theme={lightTheme}
         autoConnect={true}
         storage={store}
         storageKey="sui-wallet"
