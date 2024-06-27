@@ -80,7 +80,7 @@ export default function Page(): JSX.Element {
                     aria-current="page"
                     className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
-                    Nft
+                    POAP
                   </a>
                 ) : (
                   <a
@@ -88,7 +88,7 @@ export default function Page(): JSX.Element {
                     aria-current="page"
                     className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
                   >
-                    Nft
+                    POAP
                   </a>
                 )}
               </li>

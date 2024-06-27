@@ -113,20 +113,22 @@ export function DatePickerSection(props: {
             selected={props.selectedEnd}
             onSelect={props.onSelectEnd}
             styles={{
-              root: { width: "260px", height: "280px" },
+              root: { width: "280px", height: "300px", padding: "10px" },
               head_cell: { height: "25px" },
-              cell: { height: "32px" },
-              head: { height: "30px" },
-              day: { width: "32px", height: "32px" },
+              cell: { height: "30px" },
+              head: { height: "30px", width: "250px" },
+              table: { width: "250px" },
+              day: { width: "28px", height: "28px" },
               caption: {
                 height: "40px",
+                width: "250px",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "stretch",
+                justifyContent: "space-between",
                 fontWeight: "bold",
                 fontSize: "18px",
               },
-              nav_button_next: { margin: "5px" },
+              nav_button_next: { margin: "15px" },
             }}
             required
           />

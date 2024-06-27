@@ -1,10 +1,21 @@
 import Image from 'next/image'
 import { Button } from '../../components/common/button'
+import { useLoginStore } from '@/stores/useUserStore';
+import { useState } from 'react';
+import { jwtToAddress } from '@mysten/zklogin';
+import { formatAddress } from '@/lib/utils';
 
 export function BindingWallet() {
 
+    const {suiUserInfo, userInfo, loginByJwt} = useLoginStore();
+
+    const [ethAddr, setEthAddr] = useState<string>("")
+    const [suiAddr, setSuiAddr] = useState<string>("")
+    const [solanaAddr, setSolanaAddr] = useState<string>("")
+
+
     const chain = ["/ethereum.png", "/sui.png", "/ton-logo.png"]
-    const addresses = ["", "0xA", ""]
+    const addresses = [ethAddr, suiUserInfo.jwt == "" ? suiAddr : jwtToAddress(suiUserInfo.jwt, suiUserInfo.salt), solanaAddr]
 
     return (
         <div>
@@ -20,8 +31,8 @@ export function BindingWallet() {
                         alt="Picture of the author"
                         />
                         <div className='h-[44px] w-[2.5px] bg-cBlue/40 mx-4'></div>
-                        <div className='flex w-full text-black justify-center'>
-                            {addresses[index]=="" ? <Button name='Bind' handler={()=>{}}></Button>:addresses[index]}
+                        <div className='flex w-full text-black'>
+                            {addresses[index] == "" ? <Button name='Bind' handler={()=>{}}></Button>:formatAddress(addresses[index] as string)}
                         </div>
                     </div>
                 )

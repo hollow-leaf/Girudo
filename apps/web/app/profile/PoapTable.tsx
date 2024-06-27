@@ -1,6 +1,6 @@
 import React from 'react';
-import { Nft } from "./Nft";
-import { NftSelector } from "./NftSelector";
+import { Nft } from "../../components/Nft/Nft";
+import { NftSelector } from "../../components/Nft/NftSelector";
 
 export function NftTable() {
     return (

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Nft } from "./DaoNft";
 import { NftSelector } from "./DaoNftSelector";
 

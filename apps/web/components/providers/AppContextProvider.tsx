@@ -1,5 +1,4 @@
 "use client";
-
 import { useCurrentAccount, useSuiClient } from "@mysten/dapp-kit";
 import {
   PropsWithChildren,
