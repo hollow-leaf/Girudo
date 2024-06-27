@@ -76,7 +76,7 @@ export function LoginButton() {
 
     const params = new URLSearchParams({
       client_id: "1084217679515-8kvnn78pvg38dc88prm202c9dta2tsvd.apps.googleusercontent.com",
-      redirect_uri: "http://localhost:3000",
+      redirect_uri: "https://girudo.pages.dev/",
       response_type: "id_token",
       scope: "openid",
       nonce: nonce,
