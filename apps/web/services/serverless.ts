@@ -6,28 +6,23 @@ export async function saltByUserIdToken(sub: string): Promise<{salt: string, use
     const data = new FormData();
     data.set("sub", sub)
 
-    const response = await fetch(`api/serverless/UserInfo`, {
-        method: 'POST',
-        body: data
+    const response = await fetch(`https://girudo-app.kidneyweakx.workers.dev/api/get_data?key=${sub}`, {
+       method: 'GET'
     });
 
     const result = await response.json();
     console.log(result)
     if(result) {
-        return userInfoFromString(result.result)
+        return userInfoFromString(result.data)
     } else {
         return {salt: "", userInfo: {username: "", avater: "", email: "", suiAddress: ""}}
     }
 }
 
 export async function setSaltByUserIdToken(sub: string, salt: string, userInfo: UserInfo): Promise<boolean> {
-    const data = new FormData();
-    data.set("sub", sub)
-    data.set("userInfo", userInfoToString(salt, userInfo))
 
-    const response = await fetch(`api/serverless/setUserInfo`, {
+    const response = await fetch(`https://girudo-app.kidneyweakx.workers.dev/api/add_data?member=solo&key=${sub}&data=${userInfoToString(salt, userInfo)}`, {
         method: 'POST',
-        body: data
     });
     if(response.status == 200) {
         return true
