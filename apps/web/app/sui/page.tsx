@@ -1,5 +1,6 @@
 "use client";
 
+import { POAP } from "@/components/card/Poap";
 import { Button } from "@/components/ui/button";
 import { useGetTokenizedAsset } from "@/hooks/sui/useGetTokenizedAsset";
 import { useTokenizedAssetMint } from "@/hooks/sui/useTokenizedAssetMint";
@@ -76,6 +77,14 @@ export default function SuiPage() {
           Mint Event
         </Button>
         <h3>owned events</h3>
+        <div className="flex flex-wrap gap-2">
+          <POAP
+            image_url={"/task0.png"}
+            name={"PsyDuck"}
+            start={new Date(1719540474499).toString()}
+            end={new Date(1719540474499).toString()}
+          />
+        </div>
       </div>
     </div>
   );

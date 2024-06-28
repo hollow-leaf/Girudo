@@ -26,3 +26,14 @@ export function extractGenericType(input: string, depth: number) {
 
   return input.substring(startPos + 1, endPos);
 }
+
+export const datetimeFormatter = (datetime: string) => {
+  return new Date(datetime).toLocaleString("zh", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+    month: "numeric",
+    day: "numeric",
+    year: "numeric",
+  });
+};
