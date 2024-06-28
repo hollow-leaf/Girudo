@@ -38,7 +38,6 @@ export const useTokenizedAssetMint = () => {
         }),
     });
 
-  console.log("queryClient", queryClient);
   return useMutation({
     mutationFn: async ({
       guild,

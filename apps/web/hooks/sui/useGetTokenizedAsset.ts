@@ -7,7 +7,7 @@ import { extractGenericType } from "@/lib/sui/format";
 import { GUILD } from "@/type";
 import { useCurrentAccount, useSuiClient } from "@mysten/dapp-kit";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
 type Asset = "FT" | "NFT";
 
@@ -50,10 +50,19 @@ export function useGetTokenizedAsset(guild: GUILD, type: Asset) {
           const fields = content.fields;
           const metadata = fields.metadata.fields.contents;
           const fungible = !metadata.length;
+
           return {
             asset: fungible ? "FT" : "NFT",
             guild: extractGenericType(content.type, 1),
-            metadata: fungible ? null : metadata,
+            metadata: fungible
+              ? null
+              : metadata.reduce(
+                  (obj: any, data: any) => ({
+                    ...obj,
+                    [data.fields.key]: data.fields.value,
+                  }),
+                  {},
+                ),
             balance: BigInt(fields.balance),
           } as TokenizedAsset;
         });

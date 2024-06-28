@@ -14,6 +14,9 @@ export default function SuiPage() {
     "PSYDUCK",
     "FT",
   );
+  const { data: poap } = useGetTokenizedAsset("PSYDUCK", "NFT");
+
+  console.log("poap", poap);
 
   const points = useMemo(
     () =>
@@ -24,11 +27,32 @@ export default function SuiPage() {
     [fungibleAssets],
   );
 
+  const metaBody = {
+    name: "PsyDuck",
+    image_url:
+      "https://ipfs.io/ipfs/QmRky6vJUzHzyMULF6aaEbCubi6tNbi65czo4MDC3fCMag",
+    Description:
+      "Psyduck is a yellow Pokémon resembling a duck or a bipedal platypus",
+    host: "Solo",
+    start: "1719540474499", //ms
+    end: "1719626874499", //ms
+  };
+
   const handleMintCoin = async () => {
     await mintTokenizedAssetMutate({
       guild: "PSYDUCK",
       metadata: {},
       value: 100n,
+      recipient:
+        "0x0b3fc768f8bb3c772321e3e7781cac4a45585b4bc64043686beb634d65341798",
+    });
+  };
+
+  const handleMintEvent = async () => {
+    await mintTokenizedAssetMutate({
+      guild: "PSYDUCK",
+      metadata: metaBody,
+      value: 1n,
       recipient:
         "0x0b3fc768f8bb3c772321e3e7781cac4a45585b4bc64043686beb634d65341798",
     });
@@ -48,7 +72,9 @@ export default function SuiPage() {
         </h3>
       </div>
       <div className="border flex flex-col items-center justify-center">
-        <Button className="w-20">Mint Event</Button>
+        <Button className="w-20" onClick={handleMintEvent}>
+          Mint Event
+        </Button>
         <h3>owned events</h3>
       </div>
     </div>
