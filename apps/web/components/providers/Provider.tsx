@@ -7,8 +7,17 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { AppContextProvider } from "./AppContextProvider";
 import ToastProvider from "./ToastProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Toaster from "../shared/Toaster";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  },
+});
 const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -17,6 +26,8 @@ const Provider = ({ children }: { children: ReactNode }) => {
           <AppContextProvider>{children}</AppContextProvider>
         </ToastProvider>
       </SuiWalletProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster />
     </QueryClientProvider>
   );
 };

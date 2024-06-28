@@ -16,7 +16,7 @@ interface LoginState {
 }
 
 const useCoreUserStore = create<UserState>()((set) => ({
-  rpcUrl: SUI_TESTNET_URL, // defautl to testnet
+  rpcUrl: RPC_TESTNET_NODES[0]?.url ?? "https://fullnode.testnet.sui.io/", // defautl to testnet
   setRpcUrl: (newUrl) => set({ rpcUrl: newUrl }),
 }));
 
@@ -42,4 +42,3 @@ export const useUserStore = () => {
 export const useLoginStore = () => {
   const store = useCoreLoginStore();
   return { ...store };
-};

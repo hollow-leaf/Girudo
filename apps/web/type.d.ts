@@ -10,3 +10,4 @@ export type UserInfo = {
   email: string;
   suiAddress: string;
 }
+export type GUILD = "PSYDUCK";
