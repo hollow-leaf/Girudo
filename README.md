@@ -1,81 +1,89 @@
-# Girudo
+<div align="center">
+<h1>Girudo</h1>
 
-This is an official starter Turborepo.
+<img src="https://raw.githubusercontent.com/hollow-leaf/girudo/main/apps/web/public/girudo.png?token=GHSAT0AAAAAACRYYAD63C5HTVNFKMVNSXJ4ZT6IM5A" width="50%" height="50%"></img>
 
-## Using this example
+</div>
 
-Run the following command:
+### Demo Page
 
-```sh
-npx create-turbo@latest
+- Video: [Girudo demo](https://youtu.be/aFThCDy1UNg?si=9SaA8jX0pGBX45nK)
+- Girudo Contract:
+  - Ethereum Optimism sepolia:
+  - Sui:
+  - Solana:
+  - Zircuit:
+
+### Abstract
+
+Our platform is designed specifically for DAO managers, offering a multi-chain supported solution for publishing events and competitions. It supports Ethereum, Sui, and Solana, and integrates Hypercerts technology to generate NFTs for each event, displayed on the website to enhance the appeal and value of the activities.
+
+### Introduction
+Girudo is a decentralized application designed for DAO managers that integrates both the Web3 and Web2 worlds, offering a comprehensive solution for publishing events and competitions.
+
+Features and Innovation:
+- Multi-Chain Support
+Our platform supports multiple leading blockchains, including Ethereum, Sui, and Solana. This allows DAO managers to leverage a broader ecosystem, attracting participants from various blockchain communities.
+
+- Hypercerts Technology
+We integrate Hypercerts technology to generate unique NFTs for each event or competition. These NFTs are displayed on our website, enhancing the appeal and value of the activities by providing a tangible, digital proof of participation and achievement.
+
+- Seamless Web2 Registration
+Our platform supports Web2 registration. This feature lowers the entry barrier, enabling both blockchain novices and experienced DAO managers to easily register and participate in events.
+
+- User Experience
+Intuitive Management functions
+DAO managers can effortlessly set up, manage, and track their events using our intuitive management functions. These functions provide a seamless interface for monitoring registration status, participant data, and event outcomes, ensuring smooth operations.
+
+<br/>
+Blockchain technology provide:
+
+- Hypercerts: 
+We integrate Hypercert technology to generate unique NFTs for each event or competition. These NFTs are displayed on our website, enhancing the appeal and value of the activities by providing a tangible, digital proof of participation and achievement.
+
+- ZKLogin:
+Our platform incorporates Zero-Knowledge Login (ZKLogin) technology, which offers secure and private authentication. This ensures that user data remains confidential while providing a seamless login experience.
+
+- Sui, Solana and Ethereum:
+Our platform supports multiple leading blockchains, including Ethereum, Sui, and Solana. This allows DAO managers to leverage a broader ecosystem, attracting participants from various blockchain communities.
+
+- ERC-1155 POAP:
+We support ERC-1155 POAP (Proof of Attendance Protocol) tokens, allowing event organizers to issue digital badges to participants. These badges serve as proof of attendance and can be collected and traded by users, adding a gamified element to events.
+
+
+- AA Likes member card:
+Our platform includes the AA Likes member card feature, which acts as a digital membership card for users. This card can be used for various interactions and benefits within the platform, fostering a sense of community and loyalty among participants.
+
+### Method
+
+- Use [Optimism](https://opbnb.bnbchain.org/en) to deploy the smart contract.
+
+
+### Technical Architecture
+Psyduck Architecture
+![Psyduck Architecture](https://github.com/hollow-leaf/psyduck/blob/main/apps/extension_app/img/Psyduck_architeture.png?raw=true)
+
+Psyduck workflow
+```mermaid
+	sequenceDiagram
+		actor Streamer
+		actor Viewer
+		participant Psyduck
+		participant Smart Contract
+			
+			Streamer ->> Psyduck: Connect wallet and Register streamer Id
+			Psyduck ->> Smart Contract: Write streamer Id 
+			Smart Contract ->> Smart Contract: Binding the address
+			Smart Contract -->> Psyduck: Return binding event
+			Psyduck -->> Streamer: Response binding successfully
+			Viewer ->> Psyduck: Purchase our platform coins
+			Psyduck ->> Smart Contract: Request number of platform coin
+			Smart Contract -->> Psyduck: Response platform coin
+			Viewer ->> Psyduck: Purchase the NFT of donation
+			Psyduck ->> Smart Contract: Request the NFT
+			Smart Contract -->> Psyduck: Response the NFT
+			Psyduck -->> Viewer: Response NFT purchased
+			Viewer -->> Streamer: Receive notification that the NFT has been purchased
+			Streamer ->> Streamer: Alert the donation anime on the screen
+			Streamer -->> Viewer: Thank you so much
 ```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
