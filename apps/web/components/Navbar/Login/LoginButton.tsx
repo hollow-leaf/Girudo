@@ -15,7 +15,7 @@ import {
 } from "@mysten/zklogin";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import queryString from "query-string";
-import { saltByUserIdToken, setSaltByUserIdToken } from '@/services/serverless';
+import { saltByUserIdToken, setSaltByUserIdToken } from '@/services/serverless/user';
 import { useLoginStore } from '@/stores/useUserStore';
 import { RegisterForm } from './RegisterForm';
 import { Loading } from '@/app/components/common/loading';
@@ -59,19 +59,15 @@ export function LoginButton() {
                   ephemeralKeyPair.export().privateKey
                 );
     setEphemeralKeyPair(ephemeralKeyPair);
-    console.log(ephemeralKeyPair)
 
     const { epoch } = await suiClient.getLatestSuiSystemState();
 
-    console.log("Epoch now: ", epoch)
     const randomness = generateRandomness();
     const nonce = generateNonce(
       ephemeralKeyPair.getPublicKey(),
       Number(epoch) + 100,
       randomness
     );
-
-    console.log("Nonce: ", nonce)
 
     const params = new URLSearchParams({
       client_id: "1084217679515-8kvnn78pvg38dc88prm202c9dta2tsvd.apps.googleusercontent.com",

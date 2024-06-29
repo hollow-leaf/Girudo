@@ -7,10 +7,11 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 
 export default function Page(): JSX.Element {
   const [selected, setSelected] = useState<string>("task");
+  
 
   return (
     <div className="bg-cover min-h-screen">
-      <div className="md:flex justify-center p-4 md:px-10 z-10">
+      <div className="lg:flex justify-center p-4 lg:px-10 z-10">
         <Profile />
         <div className="md:w-[800px]">
           <div>

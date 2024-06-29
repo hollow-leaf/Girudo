@@ -1,8 +1,8 @@
 import { Button } from '@/app/components/common/button';
 import React, { useState } from 'react';
 import Image from "next/image";
-import { uploadFile } from '@/services/serverless';
-import { setSaltByUserIdToken } from '@/services/serverless';
+import { uploadFile } from '@/services/serverless/common';
+import { setSaltByUserIdToken } from '@/services/serverless/user';
 import { generateRandomness } from '@mysten/zklogin';
 
 export function RegisterForm(props: {sub: string | undefined, loading: any}) {
@@ -14,14 +14,17 @@ export function RegisterForm(props: {sub: string | undefined, loading: any}) {
     const [email, setEmail] = useState<string>("")
 
     function uploadHandler(files: FileList | null) {
-        if(files && files.length > 0) {
+        if(files && files.length > 0 && files[0]?.size as number < 60000) {
             setAvater(files[0])
+            console.log(files[0]?.size)
             const reader = new FileReader();
             reader.onloadend = () => {
                 console.log(reader.result as string)
                 setPreview(reader.result as string);
             };
             reader.readAsDataURL(files[0] as File);
+        } else if(files && files.length > 0 && files[0]?.size as number > 60000) {
+            alert("The avater size must be less than 60 KB.")
         }
     }
 

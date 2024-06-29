@@ -1,22 +1,47 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Task } from "./DaoTask/Task";
 import { DaoList } from "./DaoList";
 import { DaoNftTable } from "./DaoNft/DaoNftTable";
 import { DapInfo } from "./DaoInfo/DaoInfo";
 import { DaoMember } from "./DaoMember/DaoMember";
 import { memberSample } from "../../sampleData/member";
+import { daoByUserID } from "@/services/serverless/user";
+import { useLoginStore } from "@/stores/useUserStore";
+import { jwtDecode } from "jwt-decode";
+import { DAO } from "../type";
+import { DaoSampleData } from "@/sampleData/dao";
 
 export default function Page(): JSX.Element {
+
+  const {suiUserInfo, userInfo, loginByJwt} = useLoginStore();
+
   const [selected, setSelected] = useState<string>("task");
+  const [daos, setDaos] = useState<DAO[]>([])
+  const [daoSelected, setDaoSelected] = useState<DAO>(DaoSampleData)
+
+  useEffect(() => {
+    initial()
+  }, [suiUserInfo])
+
+  async function initial() {
+    if(suiUserInfo.jwt != "") {
+        const _dao = await daoByUserID(jwtDecode(suiUserInfo.jwt).sub as string)
+        if(_dao.length > 0) {
+          setDaos(_dao)
+          setDaoSelected(_dao[0] as DAO)
+        }
+    }
+  }
+
 
   return (
     <div className="bg-cover min-h-screen">
       <div className="md:flex justify-center p-4 md:px-10 z-10">
-        <DaoList />
+        <DaoList daos={daos} daoSelector={setDaoSelected}/>
         <div className="md:w-[800px]">
           <div className="text-4xl md:text-6xl text-black my-6 font-medium">
-            XueBuDAO
+            {daoSelected.dao_name}
           </div>
           <div>
             <ul className="flex flex-wrap w-full text-sm font-medium text-center text-gray-500 border-b-2 border-cBlue">
@@ -142,11 +167,11 @@ export default function Page(): JSX.Element {
               </li>
             </ul>
           </div>
-          {selected == "info" && <DapInfo />}
-          {selected == "task" && <Task />}
+          {selected == "info" && <DapInfo dao={daoSelected}/>}
+          {selected == "task" && <Task dao={daoSelected}/>}
           {selected == "nft" && <DaoNftTable />}
-          {selected == "member" && <DaoMember members={memberSample} />}
-          {selected == "manage" && <Task />}
+          {selected == "member" && <DaoMember dao={daoSelected}/>}
+          {selected == "manage" && <Task dao={daoSelected}/>}
         </div>
       </div>
     </div>

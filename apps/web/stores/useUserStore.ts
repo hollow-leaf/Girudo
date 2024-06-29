@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { RPC_TESTNET_NODES } from "../constants/rpcNodeList";
 import { UserInfo } from "@/type";
-import { saltByUserIdToken } from "@/services/serverless";
+import { saltByUserIdToken } from "@/services/serverless/user";
 import { jwtDecode } from "jwt-decode";
 
 interface UserState {
