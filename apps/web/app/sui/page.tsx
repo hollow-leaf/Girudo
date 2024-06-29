@@ -2,22 +2,19 @@
 
 import { POAP } from "@/components/card/Poap";
 import { Button } from "@/components/ui/button";
+import { useAddMember } from "@/hooks/sui/useAddMember";
+import { useGetMemberAsset } from "@/hooks/sui/useGetMemberAssets";
 import { useGetTokenizedAsset } from "@/hooks/sui/useGetTokenizedAsset";
 import { useTokenizedAssetMint } from "@/hooks/sui/useTokenizedAssetMint";
 import { useMemo } from "react";
 
 export default function SuiPage() {
-  const { mutateAsync: mintTokenizedAssetMutate, isPending: isTxLoading } =
-    useTokenizedAssetMint();
-
   // getOwnedObjct
   const { data: fungibleAssets, isLoading } = useGetTokenizedAsset(
     "PSYDUCK",
     "FT",
   );
   const { data: poap } = useGetTokenizedAsset("PSYDUCK", "NFT");
-
-  console.log("poap", poap);
 
   const points = useMemo(
     () =>
@@ -39,6 +36,9 @@ export default function SuiPage() {
     end: "1719626874499", //ms
   };
 
+  // ERC1155
+  const { mutateAsync: mintTokenizedAssetMutate, isPending: isTxLoading } =
+    useTokenizedAssetMint();
   const handleMintCoin = async () => {
     await mintTokenizedAssetMutate({
       guild: "PSYDUCK",
@@ -58,8 +58,24 @@ export default function SuiPage() {
         "0x0b3fc768f8bb3c772321e3e7781cac4a45585b4bc64043686beb634d65341798",
     });
   };
+
+  // Member
+  const { mutateAsync: addMemberMutate } = useAddMember();
+  const handleAddMember = async () => {
+    await addMemberMutate(
+      "0x0b3fc768f8bb3c772321e3e7781cac4a45585b4bc64043686beb634d65341798",
+    );
+  };
+
+  const { data } = useGetMemberAsset(
+    "0x0b3fc768f8bb3c772321e3e7781cac4a45585b4bc64043686beb634d65341798",
+  );
+  console.log("data", data);
   return (
-    <div className="w-full grid grid-cols-2 gap-2">
+    <div className="w-full grid grid-cols-3 gap-2">
+      <Button onClick={handleAddMember} className="px-3 py-2 w-fit">
+        Add Member
+      </Button>
       <div className="border flex flex-col items-center justify-center">
         <Button
           onClick={handleMintCoin}

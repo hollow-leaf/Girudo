@@ -3,7 +3,7 @@ import {
   TransactionObjectArgument,
   TransactionResult,
 } from "@mysten/sui/transactions";
-import { TARGETS } from "./config";
+import { OWNED_OBJECTS, SHARED_OBJECT_REFS, TARGETS } from "./config";
 import { bcs } from "@mysten/sui/bcs";
 
 export function tokenizedAssetMint(
@@ -29,4 +29,26 @@ export function tokenizedAssetMint(
   if (!tokenizedAsset) throw new Error("fail to acquire minted tokenizedAsset");
 
   return tokenizedAsset;
+}
+
+// --- Member ---
+export function addMember(tx: Transaction, member: string) {
+  tx.moveCall({
+    target: TARGETS.member.add_member_and_transfer,
+    arguments: [
+      tx.sharedObjectRef(SHARED_OBJECT_REFS.member.MemberReg),
+      tx.object(OWNED_OBJECTS.member.AdminCap),
+      tx.pure.address(member),
+    ],
+  });
+}
+
+export function memberAssetByAddress(tx: Transaction, member: string) {
+  return tx.moveCall({
+    target: TARGETS.member.member_asset_by_address,
+    arguments: [
+      tx.sharedObjectRef(SHARED_OBJECT_REFS.member.MemberReg),
+      tx.pure.address(member),
+    ],
+  });
 }

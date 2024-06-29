@@ -24,19 +24,20 @@ export const useTokenizedAssetMint = () => {
   const client = useSuiClient();
   const account = useCurrentAccount();
   const { mutateAsync: signAndExecuteTransaction } =
-    useSignAndExecuteTransaction({
-      execute: async ({ bytes, signature }) =>
-        await client.executeTransactionBlock({
-          transactionBlock: bytes,
-          signature,
-          options: {
-            // Raw effects are required so the effects can be reported back to the wallet
-            showRawEffects: true,
-            // Select additional data to return
-            showObjectChanges: true,
-          },
-        }),
-    });
+    useSignAndExecuteTransaction();
+  // {
+  //   execute: async ({ bytes, signature }) =>
+  //     await client.executeTransactionBlock({
+  //       transactionBlock: bytes,
+  //       signature,
+  //       options: {
+  //         // Raw effects are required so the effects can be reported back to the wallet
+  //         showRawEffects: true,
+  //         // Select additional data to return
+  //         showObjectChanges: true,
+  //       },
+  //     }),
+  // }
 
   return useMutation({
     mutationFn: async ({
@@ -75,7 +76,6 @@ export const useTokenizedAssetMint = () => {
         },
         {
           onSuccess: (result) => {
-            console.log("object changes", result.objectChanges);
             return result.digest;
           },
         },
