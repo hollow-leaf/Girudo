@@ -10,6 +10,7 @@ import { Button } from '../../common/button';
 export function LoginButton() {
 
     const [isShow, setIsShow] = useState<boolean>(true)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     async function webAuthenTest() {
         const opts: GenerateRegistrationOptionsOpts = {
@@ -33,7 +34,7 @@ export function LoginButton() {
     return (
         <div>
             <button onClick={()=>{setIsShow(true)}} className="bg-cBlue px-4 py-2 text-medium rounded-lg">Login</button>
-            <ModalXs showBox={isShow} closed={()=>{setIsShow(false)}}>
+            <ModalXs  isLoading={isLoading} showBox={isShow} closed={()=>{setIsShow(false)}}>
                 <Button name='Login' handler={webAuthenTest} />
             </ModalXs>
         </div>

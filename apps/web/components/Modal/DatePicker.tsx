@@ -10,6 +10,7 @@ export function DatePickerSection(props: {
 }) {
   const [showPickerStart, setShowPickerStart] = useState<boolean>(false);
   const [showPickerEnd, setShowPickerEnd] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   return (
     <div className="border-b-2 border-cBlue/50">
@@ -55,7 +56,7 @@ export function DatePickerSection(props: {
         </div>
         <div></div>
       </div>
-      <ModalXs showBox={showPickerStart} closed={setShowPickerStart}>
+      <ModalXs isLoading={isLoading} showBox={showPickerStart} closed={setShowPickerStart}>
         <div>
           <DayPicker
             onDayClick={() => {
@@ -94,7 +95,7 @@ export function DatePickerSection(props: {
           />
         </div>
       </ModalXs>
-      <ModalXs showBox={showPickerEnd} closed={setShowPickerEnd}>
+      <ModalXs isLoading={isLoading} showBox={showPickerEnd} closed={setShowPickerEnd}>
         <div>
           <DayPicker
             onDayClick={() => {

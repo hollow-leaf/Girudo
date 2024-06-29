@@ -100,8 +100,7 @@ export function LoginButton() {
   return (
       <div>
           <button onClick={()=>{setIsShow(true)}} className="bg-cBlue text-white px-4 py-2 text-medium rounded-lg">Login</button>
-          <ModalXs showBox={isShow} closed={()=>{setIsShow(false)}}>
-            {isLoading && <Loading />}
+          <ModalXs isLoading={isLoading} showBox={isShow} closed={()=>{setIsShow(false)}}>
             <div className='w-[420px] h-[600px] p-2'>
               <div className="flex justify-end opacity-60">
                   <svg onClick={() => {setIsShow(false)}} className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 50 50">
