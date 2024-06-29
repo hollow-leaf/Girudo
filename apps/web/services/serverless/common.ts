@@ -34,3 +34,27 @@ export async function getAvater(userId: string): Promise<string | undefined>{
         return undefined
     }
 };
+
+export async function getUserIdByEmail(userEmail: string): Promise<string> {
+    try {
+        const response = await fetch(serverlessHost + "/user/infoByemail", {
+            method: 'POST',
+            body: JSON.stringify({
+                "email": userEmail
+            })
+        });
+        if(response.status == 200) {
+            const r = await response.json()
+            if(r.length > 0) {
+                console.log(r)
+                return r[0].user_id
+            } else {
+                return ""
+            }
+        } else {
+            return ""
+        }
+    } catch (e) {
+        return ""
+    }
+}

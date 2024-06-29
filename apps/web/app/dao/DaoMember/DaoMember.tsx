@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { DAO, member } from "../../type";
 import { Member } from "./Member";
 import { daoMember } from "@/services/serverless/dao";
+import { MemberAdd } from "./MemberAdd"
 
 export function DaoMember(props:{dao: DAO}) {
 
@@ -17,10 +18,15 @@ export function DaoMember(props:{dao: DAO}) {
       }
 
     return (
-        <div className="flex rounded-b-lg w-full flex-wrap glass2 p-4 md:p-8" >
-            {members.map((member) => {
-                return <Member key={member.user_name} member={member}/>
-            })}
+        <div className="glass2 p-4 md:p-8">
+            <div className="flex items-center justify-end">
+                <MemberAdd dao={props.dao}/>
+            </div>
+            <div className="flex rounded-b-lg w-full flex-wrap" >
+                {members.map((member) => {
+                    return <Member key={member.user_name} member={member}/>
+                })}
+            </div>
         </div>
     )
 }
