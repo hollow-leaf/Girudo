@@ -56,8 +56,8 @@ export function DatePickerSection(props: {
         </div>
         <div></div>
       </div>
-      <ModalXs isLoading={isLoading} showBox={showPickerStart} closed={setShowPickerStart}>
-        <div>
+      <ModalXs isLoading={isLoading} showBox={showPickerStart} closed={() => {setShowPickerStart(false)}}>
+        <div className="mt-2">
           <DayPicker
             onDayClick={() => {
               setShowPickerStart(false);
@@ -95,8 +95,8 @@ export function DatePickerSection(props: {
           />
         </div>
       </ModalXs>
-      <ModalXs isLoading={isLoading} showBox={showPickerEnd} closed={setShowPickerEnd}>
-        <div>
+      <ModalXs isLoading={isLoading} showBox={showPickerEnd} closed={() => {setShowPickerEnd(false)}}>
+        <div className="mt-2">
           <DayPicker
             onDayClick={() => {
               setShowPickerEnd(false);
