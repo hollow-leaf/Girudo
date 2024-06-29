@@ -1,3 +1,4 @@
+import { task } from "@/app/type";
 import { serverlessHost } from "./common";
 
 export async function newTask(dao_id: string, sub: string, task_name: string, task_start: string, task_end: string, task_description: string, task_prize: string): Promise<boolean> {
@@ -68,5 +69,22 @@ export async function taskCheckIn(task_id: number, sub: string): Promise<boolean
         return true
     } else {
         return false
+    }
+}
+
+export async function taskBytaskId(task_id: number): Promise<task | null> {
+    console.log(task_id)
+    const response = await fetch(serverlessHost + "/task/info", {
+        method: 'POST',
+        body: JSON.stringify({
+            "task_id": task_id
+        })
+    });
+    if(response.status == 200) {
+        const r = await response.json()
+        console.log(r)
+        return r[0]
+    } else {
+        return null
     }
 }

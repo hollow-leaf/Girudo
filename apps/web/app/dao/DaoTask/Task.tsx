@@ -58,7 +58,7 @@ export function Task(props: {dao: DAO}) {
             <TaskSelector />
         </div>
         {sortTaskGroupsByDate(taskByDate).map((d, index) => {
-          return <TaskDate date={d.date} task={d.tasks}/>
+          return <TaskDate date={d.date} task={d.tasks} dao={props.dao} />
         })}
       </div>
     </div>

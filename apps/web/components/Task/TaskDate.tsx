@@ -1,6 +1,7 @@
+import { task } from "@/app/type";
 import { TaskCard } from "./TaskCard";
 
-export function TaskDate(props: {date: string, task: {task_name: string, task_prize: string, participant_status: string, dao_name: string}[]}) {
+export function TaskDate(props: {date: string, task: task[]}) {
     return (
         <div className="flex px-4">
             <div className="p-1 justify-center">
