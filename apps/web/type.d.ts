@@ -11,3 +11,4 @@ export type UserInfo = {
   suiAddress: string;
 }
 
+export type GUILD = "PSYDUCK";

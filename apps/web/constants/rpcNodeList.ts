@@ -1,6 +1,22 @@
 import { RpcNode } from "../type";
 
-export const SUI_TESTNET_URL = "https://fullnode.testnet.sui.io/";
+export const RPC_TESTNET_NODES: RpcNode[] = [
+  {
+    name: "Sui Official",
+    url: "https://fullnode.testnet.sui.io/",
+    latency: 0,
+  },
+  {
+    name: "Blockvision",
+    url: "https://sui-testnet-endpoint.blockvision.org/",
+    latency: 0,
+  },
+  {
+    name: "Suiscan",
+    url: "https://rpc-testnet.suiscan.xyz/",
+    latency: 0,
+  },
+];
 
 export const RPC_NODES: RpcNode[] = [
   {
