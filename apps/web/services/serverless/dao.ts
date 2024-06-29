@@ -1,6 +1,20 @@
 import { randomBytes } from "crypto"
 import { getUserIdByEmail, serverlessHost, uploadFile } from "./common";
-import { member, task } from "@/app/type";
+import { DAO, member, task } from "@/app/type";
+
+
+export async function allDAO(): Promise<DAO[]> {
+    const response = await fetch(serverlessHost + "/dao/all", {
+        method: 'POST',
+    });
+    if(response.status == 200) {
+        //Set creator
+        const _r = response.json()
+        return _r
+    } else {
+        return []
+    }
+}
 
 export async function createDAO(dao_name: string, dao_description: string, sub: string, avater: string): Promise<boolean> {
     const dao_id = randomBytes(32);
@@ -17,7 +31,9 @@ export async function createDAO(dao_name: string, dao_description: string, sub: 
     if(response.status == 200) {
         //Set creator
         const _r = await addCreator(dao_id_string, "creator", sub)
-        if(avater != "") await uploadFile(avater, dao_id_string)
+        if(avater != "") {
+            const t = await uploadFile(avater, dao_id_string)
+        }
 
         return _r
     } else {

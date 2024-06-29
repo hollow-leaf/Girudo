@@ -36,7 +36,7 @@ export function RegisterForm(props: {sub: string | undefined, loading: any}) {
         const salt = generateRandomness();
         if(preview !== undefined && preview) await uploadFile(preview, props.sub as string)
 
-        const r = await setSaltByUserIdToken(props.sub as string, salt, {username: name, email: email, avater: cid, suiAddress: ""})
+        const r = await setSaltByUserIdToken(props.sub as string, salt, {user_name: name, user_email: email, avater: cid, suiAddress: "", user_id: ""})
         if(r) {
             setRegisterSuccess(true)
         } else {

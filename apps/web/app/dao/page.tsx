@@ -11,6 +11,9 @@ import { useLoginStore } from "@/stores/useUserStore";
 import { jwtDecode } from "jwt-decode";
 import { DAO } from "../type";
 import { DaoSampleData } from "@/sampleData/dao";
+import { DapManage } from "./DaoManage/Manage";
+import { Loading } from "../components/common/loading";
+import { LoginButton } from "@/components/Navbar/Login/LoginButton";
 
 export default function Page(): JSX.Element {
 
@@ -37,10 +40,15 @@ export default function Page(): JSX.Element {
 
   return (
     <div className="bg-cover min-h-screen">
-      <div className="md:flex justify-center p-4 md:px-10 z-10">
+      {suiUserInfo.jwt == "" ?
+      <div className="w-full flex justify-center items-center">
+        <LoginButton />
+      </div>
+      :
+      <div className="lg:flex justify-center p-4 lg:px-10 z-10">
         <DaoList daos={daos} daoSelector={setDaoSelected}/>
-        <div className="md:w-[800px]">
-          <div className="text-4xl md:text-6xl text-black my-6 font-medium">
+        <div className="lg:w-[800px]">
+          <div className="text-4xl lg:text-6xl text-black my-6 font-medium">
             {daoSelected.dao_name}
           </div>
           <div>
@@ -55,7 +63,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
                     Info
                   </a>
@@ -63,7 +71,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-cBlue rounded-t-lg active"
                   >
                     Info
                   </a>
@@ -79,7 +87,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
                     Task
                   </a>
@@ -87,7 +95,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-cBlue rounded-t-lg active"
                   >
                     Task
                   </a>
@@ -103,7 +111,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
                     POAP
                   </a>
@@ -111,7 +119,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-cBlue rounded-t-lg active"
                   >
                     POAP
                   </a>
@@ -127,7 +135,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
                     Member
                   </a>
@@ -135,7 +143,7 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-cBlue rounded-t-lg active"
                   >
                     Member
                   </a>
@@ -151,15 +159,16 @@ export default function Page(): JSX.Element {
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-white bg-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-white bg-cBlue rounded-t-lg active"
                   >
                     Manage
                   </a>
+                  
                 ) : (
                   <a
                     href="#"
                     aria-current="page"
-                    className="md:min-w-36 inline-block py-4 px-3 md:p-4 text-cBlue rounded-t-lg active"
+                    className="lg:min-w-36 inline-block py-4 px-3 lg:p-4 text-cBlue rounded-t-lg active"
                   >
                     Manage
                   </a>
@@ -171,9 +180,10 @@ export default function Page(): JSX.Element {
           {selected == "task" && <Task dao={daoSelected}/>}
           {selected == "nft" && <DaoNftTable />}
           {selected == "member" && <DaoMember dao={daoSelected}/>}
-          {selected == "manage" && <Task dao={daoSelected}/>}
+          {selected == "manage" && <DapManage dao={daoSelected}/>}
         </div>
       </div>
+      }
     </div>
   );
 }

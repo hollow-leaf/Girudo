@@ -32,9 +32,8 @@ export function Profile() {
                     className='rounded-full border-cBlue border-4 w-[100px] h-[100px] lg:w-[180px] lg:h-[180px]'
                     />
                     <div>
-                        <div className="text-center md:text-2xl">{userInfo.username == "" ? "Brother Jake" : userInfo.username}</div>
-                        <div className="text-center text-black/60 text-xs md:text-sm">Joined March 2022</div>
-                        <div className="text-center text-cBlue text-sm md:text-lg">6666 GDO</div>
+                        <div className="text-center md:text-2xl">{userInfo.user_name == "" ? "Brother Jake" : userInfo.user_name}</div>
+                        <div className="text-center text-black/60 text-xs md:text-sm">Joined June 2024</div>
                     </div>
                 </div>
             </div>

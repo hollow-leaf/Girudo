@@ -95,7 +95,7 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-            {userInfo.username == "" ? <li><LoginButton /></li>: <li><div className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.username}</div></li>}
+            {userInfo.user_name == "" ? <li><LoginButton /></li>: <li><div className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.user_name}</div></li>}
           </ul>
         </div>
         {!closed && (
@@ -111,9 +111,7 @@ export function Navbar() {
                   </Link>
                 </li>
               ))}
-              <li className="w-full my-2 flex justify-start">
-                <LoginButton />
-              </li>
+              {userInfo.user_name == "" ? <li><LoginButton /></li>: <li><div className='my-2 py-2 px-4 text-cBlue text-center border-2 border-cBlue rounded-md lg:my-0'>{userInfo.user_name}</div></li>}
             </ul>
           </div>
         )}

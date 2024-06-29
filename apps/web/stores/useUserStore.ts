@@ -21,7 +21,7 @@ const useCoreUserStore = create<UserState>()((set) => ({
 }));
 
 const useCoreLoginStore = create<LoginState>()((set) => ({
-  userInfo: { username: "", avater: "", email: "", suiAddress: "" },
+  userInfo: { user_name: "", avater: "", user_email: "", suiAddress: "", user_id: "" },
   suiUserInfo: { jwt: "", salt: "" },
   loginByJwt: async (jwt) => {
     const decodedJwt = jwtDecode(jwt);

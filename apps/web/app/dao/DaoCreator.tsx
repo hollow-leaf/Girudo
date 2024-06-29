@@ -50,7 +50,7 @@ export function DaoCreator() {
     }
 
     return (
-        <div className=''>
+        <div className='flex min-w-[100px] mx-1 items-center cursor-pointer z-20'>
             <Popover
                 aria-labelledby="default-popover"
                 arrow={false}
