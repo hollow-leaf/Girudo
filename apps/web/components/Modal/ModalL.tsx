@@ -1,8 +1,9 @@
 import { Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react";
 import React from "react";
+import { Loading } from "@/app/components/common/loading";
 
-export function ModalL(props: {showBox: any, closed: any, children: React.ReactNode}) {
+export function ModalL(props: {showBox: any, closed: any, isLoading: any, children: React.ReactNode}) {
     return (
     <Transition appear show={props.showBox} as={Fragment}>
         <Dialog as="div" className="relative z-40" onClose={props.closed}>
@@ -29,6 +30,7 @@ export function ModalL(props: {showBox: any, closed: any, children: React.ReactN
                         leaveTo="opacity-0 scale-95"
                     >
                         <Dialog.Panel className="max-w-4xl min-h-[700px] transform overflow-hidden rounded-2xl glass6 text-left align-middle shadow-xl transition-all">
+                        {props.isLoading && <Loading />}
                         <div className="py-2 px-4">
                             <div className="flex justify-end mt-2">
                                 <svg onClick={props.closed} className='cursor-pointer' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 50 50">

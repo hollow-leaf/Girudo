@@ -14,12 +14,12 @@ export function BindingWallet() {
     const [solanaAddr, setSolanaAddr] = useState<string>("")
 
 
-    const chain = ["/ethereum.png", "/sui.png", "/ton-logo.png"]
-    const addresses = [ethAddr, suiUserInfo.jwt == "" ? suiAddr : jwtToAddress(suiUserInfo.jwt, suiUserInfo.salt), solanaAddr]
+    const chain = ["/ethereum.png", "/sui.png", "/Solana_logo.png"]
+    const addresses = [ethAddr, suiUserInfo.jwt == "" || suiUserInfo.jwt == undefined ? suiAddr : jwtToAddress(suiUserInfo.jwt, suiUserInfo.salt), solanaAddr]
 
     return (
         <div>
-            <div className='p-4 text-3xl text-medium text-cBlue'>Wallet Address</div>
+            <div className='p-2 text-3xl text-medium text-cBlue'>Wallet Address</div>
             {chain.map((chain, index) => {
                 return (
                     <div key={chain} className="flex w-64 md:w-96 items-center px-4 my-2">
