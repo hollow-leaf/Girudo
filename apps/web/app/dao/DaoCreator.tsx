@@ -39,7 +39,7 @@ export function DaoCreator() {
     async function createHandler() {
         setisLoading(true)
         console.log(suiUserInfo.jwt)
-        if(name == "" || description == "" || suiUserInfo.jwt == undefined) {
+        if(name == "" || description == "" || suiUserInfo.jwt == "") {
             alert("Fillfull all columns and log in")
             setisLoading(false)
             return
