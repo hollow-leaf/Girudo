@@ -10,7 +10,7 @@ export function DatePickerSection(props: {
 }) {
   const [showPickerStart, setShowPickerStart] = useState<boolean>(false);
   const [showPickerEnd, setShowPickerEnd] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   return (
     <div className="border-b-2 border-cBlue/50">
