@@ -5,10 +5,11 @@ export type RpcNode = {
 };
 
 export type UserInfo = {
-  username: string;
+  user_name: string;
   avater: string;
-  email: string;
+  user_email: string;
   suiAddress: string;
+  user_id: string;
 }
 
 export type GUILD = "PSYDUCK";

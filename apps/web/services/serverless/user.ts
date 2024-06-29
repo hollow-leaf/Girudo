@@ -14,9 +14,9 @@ export async function saltByUserIdToken(sub: string): Promise<{salt: string, use
     const result = await response.json();
 
     if(result.length > 0) {
-        return {salt: result[0].user_salt, userInfo: {username: result[0].user_name, avater: "", email: result[0].user_email, suiAddress: ""}}
+        return {salt: result[0].user_salt, userInfo: {user_name: result[0].user_name, avater: "", user_email: result[0].user_email, suiAddress: "", user_id: ""}}
     } else {
-        return {salt: "", userInfo: {username: "", avater: "", email: "", suiAddress: ""}}
+        return {salt: "", userInfo: {user_name: "", avater: "", user_email: "", suiAddress: "", user_id: ""}}
     }
 }
 
@@ -26,8 +26,8 @@ export async function setSaltByUserIdToken(sub: string, salt: string, userInfo: 
         method: 'POST',
         body: JSON.stringify({
             "sub": sub,
-            "user_name": userInfo.username,
-            "user_email": userInfo.email,
+            "user_name": userInfo.user_name,
+            "user_email": userInfo.user_email,
             "user_salt": salt
            })
     });
@@ -63,6 +63,18 @@ export async function taskByUserID(sub: string): Promise<task[]> {
     if(response.status == 200) {
         const r = await response.json()
         console.log(r)
+        return r
+    } else {
+        return []
+    }
+}
+
+export async function allUser(): Promise<UserInfo[]> {
+    const response = await fetch(serverlessHost + "/user/all", {
+        method: 'POST',
+    });
+    if(response.status == 200) {
+        const r = await response.json()
         return r
     } else {
         return []

@@ -88,3 +88,15 @@ export async function taskBytaskId(task_id: number): Promise<task | null> {
         return null
     }
 }
+
+export async function allTask(): Promise<task[]> {
+    const response = await fetch(serverlessHost + "/task/all", {
+        method: 'POST',
+    });
+    if(response.status == 200) {
+        const r = await response.json()
+        return r
+    } else {
+        return []
+    }
+}

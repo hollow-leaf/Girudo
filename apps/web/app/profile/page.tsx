@@ -4,13 +4,22 @@ import { Task } from "@/components/Task/Task";
 import { Profile } from "./Profile";
 import { NftTable } from "@/components/Nft/NftTable";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
+import { useLoginStore } from "@/stores/useUserStore";
+import { Button } from "../components/common/button";
+import { LoginButton } from "@/components/Navbar/Login/LoginButton";
 
 export default function Page(): JSX.Element {
   const [selected, setSelected] = useState<string>("task");
-  
+  const {suiUserInfo, userInfo, loginByJwt} = useLoginStore();
+
 
   return (
     <div className="bg-cover min-h-screen">
+      {suiUserInfo.jwt == "" ?
+      <div className="w-full flex justify-center items-center">
+        <LoginButton />
+      </div>
+      :
       <div className="lg:flex justify-center p-4 lg:px-10 z-10">
         <Profile />
         <div className="md:w-[800px]">
@@ -83,7 +92,7 @@ export default function Page(): JSX.Element {
           {selected == "records" && <Task />}
           {selected == "info" && <ProfileInfo />}
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

@@ -4,13 +4,13 @@ export const uploadFile = async (fileToUpload: string, userID: string) => {
     try {
         const data = new FormData();
         data.set("file", fileToUpload);
-        data.set("userId", userID)
-        const res = await fetch("https://greenpower.wayneies1206.workers.dev/uploadAvater", {
+        data.set("userId", userID.split(" ")[0] as string)
+        const res = await fetch(serverlessHost + "/uploadAvater", {
             method: "POST",
             body: data,
         });
         const resData = await res.json();
-        return resData.IpfsHash
+        return resData
     } catch (e) {
         console.log(e)
         return undefined
@@ -21,8 +21,8 @@ export async function getAvater(userId: string): Promise<string | undefined>{
 
     try {
         const data = new FormData();
-        data.set("userId", userId);
-        const res = await fetch("https://greenpower.wayneies1206.workers.dev/getAvater", {
+        data.set("userId", userId.split(" ")[0] as string);
+        const res = await fetch(serverlessHost + "/getAvater", {
             method: "POST",
             body: data,
         });

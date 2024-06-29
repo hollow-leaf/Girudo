@@ -18,22 +18,22 @@ export function DapInfo(props: {dao: DAO}) {
     }
 
     return (
-        <div className="flex rounded-b-lg p-2 md:p-8 w-full justify-center md:justify-start glass2">
-            <div className="md:flex">
+        <div className="flex rounded-b-lg p-2 lg:p-8 w-full justify-center lg:justify-start glass2">
+            <div className="lg:flex">
                 <div>
                     <div className="flex justify-center">
                         <Image
-                        className='my-4 glass border-2 border-cBlue rounded-full'
+                        className='w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] my-4 glass border-2 border-cBlue rounded-full'
                         src={preview}
                         width={200}
                         height={200}
                         alt="Picture of the author"
                         />
                     </div>
-                    <div className="text-center text-black text-2xl md:text-4xl">{props.dao.dao_name}</div>
-                    <div className="text-center text-black/60 text-sm md:text-lg">Created June 2024</div>
+                    <div className="text-center text-black text-2xl lg:text-4xl">{props.dao.dao_name}</div>
+                    <div className="text-center text-black/60 text-sm lg:text-lg">Created June 2024</div>
                 </div>
-                <div className='p-10'>
+                <div className='lg:w-[500px] lg:h-[200px] p-10'>
                     <div className="text-lg text-black">
                         {props.dao.dao_description}
                     </div>
