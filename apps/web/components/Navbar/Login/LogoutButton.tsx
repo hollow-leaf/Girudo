@@ -15,7 +15,7 @@ export function LogoutButton() {
     }
 
     return (
-        <div className="mx-1 my-1">
+        <div className="mx-1 my-2 lg:mx-0">
             <Button name="Log out" handler={logoutHandler}/>
         </div>
     )

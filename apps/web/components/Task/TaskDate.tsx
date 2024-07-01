@@ -12,7 +12,7 @@ export function TaskDate(props: {date: string, task: task[]}) {
                 <div className="text-lg md:text-2xl font-medium text-black">{props.date}</div>
                 {
                     props.task.map((task) => {
-                        return <TaskCard task={task}/>
+                        return <TaskCard key={task.task_id} task={task}/>
                     })
                 }
             </div>

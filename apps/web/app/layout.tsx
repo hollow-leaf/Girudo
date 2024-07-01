@@ -25,7 +25,7 @@ export default function RootLayout({
         <Provider>
           <div className="min-h-screen font-sans antialiased relative bg-main bg-cover bg-fixed bg-center">
             <Navbar />
-            <div className="min-h-[calc(100vh-224px) text-[#6e6f6f] flex flex-col py-6 max-w-6xl m-auto">
+            <div className="relative z-30 min-h-[calc(100vh-224px) text-[#6e6f6f] flex flex-col py-6 max-w-6xl m-auto">
               {children}
             </div>
           </div>

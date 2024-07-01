@@ -39,7 +39,7 @@ export function Navbar() {
   const solWalletAddress = undefined;
 
   return (
-    <nav className="glass2 border-gray-200">
+    <nav className="relative z-40 glass2 border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
         <div className="flex items-center rtl:space-x-reverse">
           <Image
@@ -100,18 +100,13 @@ export function Navbar() {
             :
             <li>
               <div data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.user_name}</div>
-              <div id="dropdownHover" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                  <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                    <li>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                    </li>
-                  </ul>
-              </div>
-            </li>}
+            </li>
+            }
+            {userInfo.user_name != "" && <LogoutButton />}
           </ul>
         </div>
         {!closed && (
-          <div className=" absolute left-[7%] top-[90%] w-[340px] md:hidden md:w-auto" id="navbar-default">
+          <div className="absolute right-[7%] top-[90%] w-[340px] md:hidden md:w-auto">
             <ul className="bg-white/90 font-medium flex flex-col p-4 md:items-center md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
               {NAV_LIST.map((nav) => (
                 <li key={nav.name}>

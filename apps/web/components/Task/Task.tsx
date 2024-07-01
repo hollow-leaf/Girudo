@@ -55,7 +55,7 @@ export function Task() {
           <TaskSelection />
         </div>
         {sortTaskGroupsByDate(taskByDate).map((d, index) => {
-          return <TaskDate date={d.date} task={d.tasks}/>
+          return <TaskDate key={d.date} date={d.date} task={d.tasks}/>
         })}
       </div>}
     </div>
