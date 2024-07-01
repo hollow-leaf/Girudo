@@ -52,7 +52,7 @@ export default function Page(): JSX.Element {
             {daoSelected.dao_name}
           </div>
           <div>
-            <ul className="flex flex-wrap w-full text-sm font-medium text-center text-gray-500 border-b-2 border-cBlue">
+            <ul className="flex flex-wrap w-full text-sm font-medium text-center text-xs border-b-2 border-cBlue">
               <li
                 onClick={() => {
                   setSelected("info");

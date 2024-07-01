@@ -13,6 +13,7 @@ interface LoginState {
   userInfo: UserInfo;
   suiUserInfo: { jwt: string; salt: string };
   loginByJwt: (jwt: string) => void;
+  logout: () => void;
 }
 
 const useCoreUserStore = create<UserState>()((set) => ({
@@ -35,6 +36,12 @@ const useCoreLoginStore = create<LoginState>()((set) => ({
       });
     }
   },
+  logout: () => {
+    set({
+      userInfo: { user_name: "", avater: "", user_email: "", suiAddress: "", user_id: "" },
+      suiUserInfo: { jwt: "", salt: "" },
+    })
+  }
 }));
 
 export const useUserStore = () => {
