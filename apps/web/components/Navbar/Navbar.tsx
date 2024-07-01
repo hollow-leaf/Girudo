@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import LoginMenu from "../menu/loginMenu";
 import { useLoginStore } from '@/stores/useUserStore';
+import { LogoutButton } from './Login/LogoutButton';
 
 const NAV_LIST: Nav[] = [
   { name: "Home", link: "/" },
@@ -26,7 +27,7 @@ export function Navbar() {
   // Sui wallet
   const { walletAddress: suiWalletAddress } = useAppContext();
   const routerLink = usePathname();
-  const {suiUserInfo, userInfo, loginByJwt} = useLoginStore();
+  const {suiUserInfo, userInfo, logout} = useLoginStore();
 
   const [closed, setClosed] = useState<Boolean>(true);
   function toggle() {
@@ -95,12 +96,23 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-            {userInfo.user_name == "" ? <li><LoginButton /></li>: <li><div className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.user_name}</div></li>}
+            {userInfo.user_name == "" ? <li><LoginButton /></li>
+            :
+            <li>
+              <div data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" className='py-2 px-4 text-cBlue border-2 border-cBlue rounded-md'>{userInfo.user_name}</div>
+              <div id="dropdownHover" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                  <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                    <li>
+                      <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                    </li>
+                  </ul>
+              </div>
+            </li>}
           </ul>
         </div>
         {!closed && (
-          <div className="w-full md:hidden md:w-auto" id="navbar-default">
-            <ul className="font-medium flex flex-col p-4 md:items-center md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+          <div className=" absolute left-[7%] top-[90%] w-[340px] md:hidden md:w-auto" id="navbar-default">
+            <ul className="bg-white/90 font-medium flex flex-col p-4 md:items-center md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
               {NAV_LIST.map((nav) => (
                 <li key={nav.name}>
                   <Link
@@ -111,7 +123,11 @@ export function Navbar() {
                   </Link>
                 </li>
               ))}
-              {userInfo.user_name == "" ? <li><LoginButton /></li>: <li><div className='my-2 py-2 px-4 text-cBlue text-center border-2 border-cBlue rounded-md lg:my-0'>{userInfo.user_name}</div></li>}
+              {userInfo.user_name == "" ? <li><LoginButton /></li>
+              :
+              <li>
+                <LogoutButton />
+              </li>}
             </ul>
           </div>
         )}

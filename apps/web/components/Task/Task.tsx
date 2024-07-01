@@ -49,6 +49,7 @@ export function Task() {
 
   return (
     <div className="flex justify-center p-4">
+      {tasks.length > 0 &&
       <div>
         <div className="flex items-center justify-end">
           <TaskSelection />
@@ -56,7 +57,7 @@ export function Task() {
         {sortTaskGroupsByDate(taskByDate).map((d, index) => {
           return <TaskDate date={d.date} task={d.tasks}/>
         })}
-      </div>
+      </div>}
     </div>
   );
 }

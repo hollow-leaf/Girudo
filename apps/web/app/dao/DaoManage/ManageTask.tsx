@@ -3,7 +3,7 @@ import { task } from "@/app/type";
 
 export function ManageTask(props: {tasks : task[]}) {
     return (
-        <div className="w-[400px] lg:w-[700px] my-4 relative overflow-x-auto rounded-lg">
+        <div className="w-[330px] lg:w-[700px] my-4 relative overflow-x-auto rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right">
                 <thead className="bg-white/50 text-xs text-gray-700 uppercase">
                     <tr>
