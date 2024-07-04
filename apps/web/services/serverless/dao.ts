@@ -61,6 +61,23 @@ export async function addMember(dao_id: string, member_role: string, userEmail: 
     }
 }
 
+export async function addMemberBySub(dao_id: string, member_role: string, sub: string): Promise<boolean> {
+
+    const response = await fetch(serverlessHost + "/dao/newMember", {
+        method: 'POST',
+        body: JSON.stringify({
+            "sub": sub,
+            "dao_id": dao_id,
+            "member_role": member_role,
+        })
+    });
+    if(response.status == 200) {
+        return true
+    } else {
+        return false
+    }
+}
+
 export async function addCreator(dao_id: string, member_role: string, userId: string): Promise<boolean> {
 
     const response = await fetch(serverlessHost + "/dao/newMember", {

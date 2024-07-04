@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { UserInfo } from "@/type";
-import { ModalXs } from "../Modal/ModalXS";
 import { useEffect, useState } from "react";
 import { Popover } from "flowbite-react";
 import { DAO } from '@/app/type';
 import { daoByUserID } from '@/services/serverless/user';
 import { DaoCard } from '@/app/dao/DaoCard';
-import { Nft } from '../Nft/Nft';
+import { ModalXs } from '@/components/Modal/ModalXS';
+import { Nft } from '../../components/Nft/Nft';
 
 export function UserInfoCard(props: {userInfo: UserInfo, showBox: any, close: any}) {
 

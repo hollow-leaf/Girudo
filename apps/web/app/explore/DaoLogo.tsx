@@ -4,10 +4,12 @@ import { Popover } from "flowbite-react";
 import { DAO } from '../type';
 import { useEffect, useState } from 'react';
 import { getAvater } from '@/services/serverless/common';
+import { DaoInfoCard } from './DaoInfoCard';
 
 export function DaoLogo(props: {dao: DAO, daoSelector: any}) {
 
     const [preview, setPreview] = useState<string>("./girudo.png");
+    const [showBox, setShowBox] = useState<boolean>(false)
 
     useEffect(() => {
         initialize()
@@ -31,7 +33,7 @@ export function DaoLogo(props: {dao: DAO, daoSelector: any}) {
                 theme={{base: "absolute z-20 glass outline-none border-0 rounded-lg shadow-sm"}}
                 >
                 <Image
-                onClick={() => {props.daoSelector(props.dao)}}
+                onClick={() => {setShowBox(true)}}
                 className='w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] my-1 mx-1 glass border-2 lg:border-4 border-cBlue rounded-full'
                 src={preview}
                 width={300}
@@ -40,6 +42,7 @@ export function DaoLogo(props: {dao: DAO, daoSelector: any}) {
                 />
             </Popover>
             <div className='py-2 text-cBlue lg:text-2xl font-medium'>{props.dao.dao_name}</div>
+            <DaoInfoCard daoInfo={props.dao} daoAvater={preview} showBox={showBox} close={() => {setShowBox(false)}} />
         </div>
     )
 }
