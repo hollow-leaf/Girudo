@@ -25,7 +25,7 @@ export function Task() {
   async function initial() {
     if(suiUserInfo.jwt != "") {
         const t = await taskByUserID(jwtDecode(suiUserInfo.jwt).sub as string)
-        setTasks(t)
+        //setTasks(t)
     }
   }
 
@@ -49,7 +49,7 @@ export function Task() {
 
   return (
     <div className="flex justify-center p-4">
-      {tasks.length > 0 &&
+      {tasks.length > 0 ?
       <div>
         <div className="flex items-center justify-end">
           <TaskSelection />
@@ -57,7 +57,10 @@ export function Task() {
         {sortTaskGroupsByDate(taskByDate).map((d, index) => {
           return <TaskDate key={d.date} date={d.date} task={d.tasks}/>
         })}
-      </div>}
+      </div>
+      :
+      <div className="p-4 text-cBlue text-2xl">Join DAO and Search for Task!</div>
+      }
     </div>
   );
 }

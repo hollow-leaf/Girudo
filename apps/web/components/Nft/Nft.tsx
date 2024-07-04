@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export function Nft() {
     return (
-        <div className="flex justify-center w-[150px] lg:w-56 m-2 p-1 md:p-4 cursor-pointer glass border-2 border-cBlue rounded-lg shadow">
+        <div className="flex justify-center min-w-[150px] lg:w-56 m-2 p-1 md:p-4 cursor-pointer glass border-2 border-cBlue rounded-lg shadow">
             <div>
                 <div>
                     <Image

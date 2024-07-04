@@ -32,7 +32,7 @@ export default function Explore(): JSX.Element {
       
     return (
         <div className="px-6 lg:px-10">
-            <div className="w-full flex flex-col items-center py-36 lg:py-[360px]">
+            <div className="w-full flex flex-col items-center py-48 lg:py-[360px]">
                 <p className="text-3xl lg:text-7xl font-extrabold text-cBlue">Participate and Contribute</p>
                 <div className="text-3xl lg:text-7xl font-extrabold text-cBlue" >to the <span className="text-4xl lg:text-8xl font-extrabold bg-gradient-to-r from-[#3F09F9] via-[#CB6BE0] to-[#CE2CE5] inline-block text-transparent bg-clip-text">DAO Community</span></div>
             </div>
@@ -62,7 +62,7 @@ export default function Explore(): JSX.Element {
             <div className="w-full flex flex-wrap justify-center">
             {
                 tasks.map((task) => {
-                    return <AwesomeTask task={task} />
+                    return <AwesomeTask key={task.task_id} task={task} />
                 })
             }
             </div>
