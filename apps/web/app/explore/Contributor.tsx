@@ -4,7 +4,7 @@ import { Popover } from "flowbite-react";
 import { useEffect, useState } from 'react';
 import { getAvater } from '@/services/serverless/common';
 import { UserInfo } from '@/type';
-import { UserInfoCard } from '@/components/card/UserInfoCard';
+import { UserInfoCard } from './UserInfoCard';
 
 export function Contributor(props: {contributor: UserInfo}) {
 
