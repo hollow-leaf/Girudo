@@ -25,7 +25,7 @@ export function Task() {
   async function initial() {
     if(suiUserInfo.jwt != "") {
         const t = await taskByUserID(jwtDecode(suiUserInfo.jwt).sub as string)
-        //setTasks(t)
+        setTasks(t)
     }
   }
 
