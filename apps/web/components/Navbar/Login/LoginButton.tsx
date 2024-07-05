@@ -101,7 +101,7 @@ export function LoginButton() {
       <div>
           <button onClick={()=>{setIsShow(true)}} className="bg-cBlue text-white px-4 py-2 text-medium rounded-lg">Login</button>
           <ModalXs isLoading={isLoading} showBox={isShow} closed={()=>{setIsShow(false)}}>
-            <div className='w-[330px] lg:w=[420px] h-[600px] p-2'>
+            <div className='w-[330px] lg:w-[450px] h-[600px] p-2'>
               <div className='w-full flex justify-center mt-6 px-2 lg:px-8'>
               {activeStep == 0 && <SignInWithGoogle loginHandler={zkLogin}/>}
               {activeStep == 1 && <div>Successful</div>}
