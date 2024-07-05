@@ -22,7 +22,6 @@ export async function saltByUserIdToken(sub: string): Promise<{salt: string, use
 
 export async function setSaltByUserIdToken(sub: string, salt: string, userInfo: UserInfo): Promise<boolean> {
 
-    return false
     const response = await fetch(serverlessHost + "/user/new", {
         method: 'POST',
         body: JSON.stringify({
